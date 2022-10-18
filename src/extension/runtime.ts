@@ -38,19 +38,31 @@ export function isOptionsPage(): boolean {
 }
 
 export async function sendMessage<Request, Response = any, Error = any>({ tabId, ...message }: Message<Request> & { tabId?: number }): Promise<Response> {
-  let response: { data?: Response, error?: Error };
+  let resolve: (data: Response) => void;
+  let reject: (error: Error) => void;
 
   if (tabId) {
-    response = await sendMessageToTab(tabId, message);
+    sendMessageToTab(tabId, message, responseCallback);
   } else {
-    response = await chrome.runtime.sendMessage(message);
+    chrome.runtime.sendMessage(message, responseCallback);
   }
 
-  if (response?.data) {
-    return response.data;
-  } else if (response?.error) {
-    throw response.error;
+  function responseCallback(res: { data?: Response, error?: Error } = {}) {
+    const resultFields = Object.getOwnPropertyNames(res) as (keyof typeof res)[];
+
+    if (resultFields.includes("data")) resolve(res.data);
+    if (resultFields.includes("error")) reject(res.error);
+    else resolve(null); // called in case `onMessage(() => undefined)`
+
+    if (chrome.runtime.lastError) {
+      // fix: "Could not establish connection. Receiving end does not exist."
+    }
   }
+
+  return new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
 }
 
 export interface OnMessageCallback<Request, Response> {

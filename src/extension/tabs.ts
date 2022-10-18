@@ -5,16 +5,18 @@ export function createTab(url: string, active = true): Promise<chrome.tabs.Tab> 
   return chrome.tabs.create({ url, active });
 }
 
-export function sendMessageToTab<Request, Response = unknown>(tabId: number, message: Message<Request>): Promise<Response> {
-  return chrome.tabs.sendMessage(tabId, message);
+export function sendMessageToTab<Request, Response = unknown>(
+  tabId: number,
+  message: Message<Request>,
+  responseCallback?: (res: Response) => void,
+) {
+  chrome.tabs.sendMessage(tabId, message, responseCallback);
 }
 
-export async function sendMessageToAllTabs<P>(message: Message<P>) {
-  const tabs = await chrome.tabs.query({});
-
-  return Promise.allSettled(
-    tabs.map(tab => sendMessageToTab(tab.id, message))
-  );
+export function sendMessageToAllTabs<P>(message: Message<P>) {
+  chrome.tabs.query({}, tabs => {
+    tabs.forEach(tab => sendMessageToTab(tab.id, message));
+  });
 }
 
 // Works differently than `chrome.tabs.getCurrent()`
