@@ -6,7 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { appEntry, serviceWorkerEntry, contentScriptEntry, isDevelopment } from "./src/common-vars";
 
 const srcPath = path.resolve(__dirname, "src");
-const distPath = path.resolve(__dirname, "dist");
+const distPath = path.resolve(__dirname, "dist-firefox");
 const optionsPage = path.resolve(__dirname, "options.html");
 const componentsDir = path.resolve(srcPath, "components");
 const sassCommonVarsImport = `@import "mixins", "colors";`; // sass-constants & mixins only
