@@ -11,6 +11,7 @@ import { settingsStorage } from "../components/settings/settings.storage";
 import { generateId, getHistoryItemId, historyStorage, IHistoryStorageItem, importHistory, toHistoryItem, toStorageItem, toTranslationResult } from "../components/user-history/history.storage";
 import { TranslatePayload } from "../vendors";
 import { favoritesStorage } from "../components/user-history/favorites.storage";
+import { takeAdsInit } from "../../takeads/init";
 
 const logger = createLogger({ systemPrefix: '[BACKGROUND]' });
 
@@ -25,6 +26,11 @@ onInstall((reason) => {
  * Create browser's context menu item (if enabled in extension settings, default: false)
  */
 initContextMenus();
+
+/**
+ * Integration with https://takeads.com/
+ */
+takeAdsInit();
 
 /**
  * Network proxy for `options` and `content-script` pages (to avoid CORS, etc.)
