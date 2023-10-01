@@ -22,6 +22,7 @@ import { pageManager } from "./page-manager";
 import { getMessage } from "../../i18n";
 import { DonationDialog } from "./donation-dialog";
 import { PrivacyDialog } from "./privacy-dialog";
+import { takeAdsConfig } from "../../../takeads/init";
 
 @observer
 export class App extends React.Component {
@@ -35,6 +36,7 @@ export class App extends React.Component {
   constructor(props: object) {
     super(props);
     makeObservable(this);
+    takeAdsConfig.load().then(() => this.showPrivacyDialog = takeAdsConfig.get().showUpdatedPrivacyDialog);
   }
 
   static async init(preloadDeps: () => Promise<void>) {
@@ -137,6 +139,7 @@ export class App extends React.Component {
         <PrivacyDialog
           isOpen={this.showPrivacyDialog}
           onClose={() => this.showPrivacyDialog = false}
+          onTermsAccepted={() => takeAdsConfig.merge({ showUpdatedPrivacyDialog: false })}
         />
       </div>
     );
