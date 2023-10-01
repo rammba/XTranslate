@@ -12,13 +12,14 @@
   }
 
   .policyContent {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: var(--theme-spacing-half);
     overflow: auto;
     max-height: 300px;
     font-size: small;
 
-    h1, h2,
-    /*> :not([data-updated])*/ {
+    h1, h2 {
       display: none;
     }
   }

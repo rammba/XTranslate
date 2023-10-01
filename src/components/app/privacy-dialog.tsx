@@ -44,7 +44,7 @@ export class PrivacyDialog extends React.Component<PrivacyDialogProps> {
           <h3>{getMessage("privacy_policy_title_updated")}</h3>
           {this.renderPolicyText()}
           <Button
-            outline
+            primary
             className="box center"
             label={getMessage("privacy_policy_accept_terms")}
             onClick={this.accept}
