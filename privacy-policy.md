@@ -25,4 +25,5 @@ We are committed to protecting your privacy and ensuring the security of your pe
 
 ## How to delete all my user data related to the extension?
 
-Simply uninstall extension normally and all local user data will be erased.
+Simply uninstall extension normally and all local user data will be erased,
+if you are not agreed with current terms & conditions.
