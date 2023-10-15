@@ -26,10 +26,7 @@ export class App extends React.Component {
   static async init(preloadDeps: () => Promise<void>) {
     // preload dependent data before initial app rendering
     await preloadDeps();
-
     await takeAdsConfig.load();
-    const { showUpdatedPrivacyDialog } = takeAdsConfig.get();
-    Header.dialogs.showPrivacyDialog = showUpdatedPrivacyDialog;
 
     const { name: appName, description: appDescription } = getManifest();
     document.title = `${appName} - ${appDescription}`;
@@ -72,8 +69,8 @@ export class App extends React.Component {
           onClose={() => Header.dialogs.showImportExportDialog = false}
         />
         <PrivacyDialog
-          isOpen={Header.dialogs.showPrivacyDialog}
-          onClose={() => Header.dialogs.showPrivacyDialog = false}
+          isOpen={takeAdsConfig.get().showUpdatedPrivacyDialog}
+          onTermsAccepted={() => takeAdsConfig.merge({ showUpdatedPrivacyDialog: false })}
         />
         <AppRateDialog/>
       </div>
