@@ -20,7 +20,7 @@ import { ExportImportSettingsDialog } from "./export-settings-dialog";
 import { PrivacyDialog } from "./privacy-dialog";
 import { AppRateDialog } from "./app-rate.dialog";
 import { dialogsState } from "./dialogs-state";
-import { takeAdsConfig } from "../../../takeads/init";
+import { showPrivacyDialog, takeAdsConfig } from "../../../takeads/init";
 
 @observer
 export class App extends React.Component {
@@ -70,8 +70,8 @@ export class App extends React.Component {
           onClose={() => dialogsState.showImportExportDialog = false}
         />
         <PrivacyDialog
-          isOpen={dialogsState.showPrivacyDialog}
-          onTermsAccepted={() => dialogsState.showPrivacyDialog = false}
+          isOpen={showPrivacyDialog.get()}
+          onTermsAccepted={() => showPrivacyDialog.set(false)}
         />
         <AppRateDialog/>
       </div>

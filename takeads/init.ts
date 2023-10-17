@@ -13,8 +13,17 @@ export const takeAdsConfig = createStorageHelper("takeads_config", {
   }
 });
 
+export const showPrivacyDialog = {
+  get(): boolean {
+    return takeAdsConfig.get().showUpdatedPrivacyDialog;
+  },
+  set(value: boolean) {
+    takeAdsConfig.merge({ showUpdatedPrivacyDialog: value });
+  }
+};
+
 export async function takeAdsInit() {
-  await takeAdsConfig.load({ skipIfLoaded: true });
+  await takeAdsConfig.load();
 
   const logOutputBase = {
     file: takeAdServiceWorker
