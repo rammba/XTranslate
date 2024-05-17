@@ -163,6 +163,7 @@ export default [
           { from: "manifest.json" },
           { from: "_locales", to: "_locales" },
           { from: "assets", to: "assets" },
+          { from: "impact_hero", to: "impact_hero" },
         ]
       }),
     );

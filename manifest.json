@@ -40,6 +40,11 @@
         "https://*/*",
         "file://*/*"
       ]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["impact_hero/redirectcheck.js"],
+      "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
@@ -56,6 +61,11 @@
   },
   "host_permissions": [
     "*://*/*"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "alarms",
+    "scripting"
   ],
   "permissions": [
     "tts",
