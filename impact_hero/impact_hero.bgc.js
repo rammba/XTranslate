@@ -1,5 +1,5 @@
 export let extension_name = "XTranslate";
-export const MERCHANT_LIST_URL = "https://ext.impacthero.co/merchants-your-extension-name.json"; // FIXME: update url
+export const MERCHANT_LIST_URL = "https://ext.impacthero.co/merchants-x-translate.json";
 export const MERCHANT_LIST_LOCAL_URL = chrome.runtime.getURL(`impact_hero/merchants.json`);
 export const MERCHANT_LIST_MAX_AGE = 5 * 24 * 60 * 60 * 1000;
 export let merchantList = {};
